@@ -21,15 +21,16 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Sizer(builder: (context, orientation, screenType) {
-      return MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-          visualDensity: VisualDensity.adaptivePlatformDensity,
-        ),
-        home: MyHomePage(title: 'Flutter Demo Home Page'),
-      );
+    return LayoutBuilder(builder: (context, constraints) {
+      return OrientationBuilder(
+          builder: (BuildContext context, Orientation orientation) {
+        SizerUtil().init(constraints, orientation);
+        return MaterialApp(
+          title: 'Flutter Demo',
+          debugShowCheckedModeBanner: false,
+          home: MyHomePage(title: 'Flutter Demo Home Page'),
+        );
+      });
     });
   }
 }
