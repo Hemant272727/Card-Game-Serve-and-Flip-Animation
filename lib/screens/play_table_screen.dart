@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../constants/image_constants.dart';
-import '../widgets/play_table_widget.dart';
+import '../widgets/complete_play_table_widget.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -97,7 +97,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         child: Stack(
           children: [
-            PlayTableWidget(
+            CompletePlayTableWidget(
               servedPages: _servedPages,
               flipedPages: _flipedPages,
             ),
