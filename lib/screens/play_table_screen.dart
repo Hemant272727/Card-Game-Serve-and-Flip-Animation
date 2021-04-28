@@ -6,16 +6,14 @@ import 'package:flutter/services.dart';
 import '../constants/image_constants.dart';
 import '../widgets/complete_play_table_widget.dart';
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-
-  final String title;
+class PlayTableScreen extends StatefulWidget {
+  PlayTableScreen();
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _PlayTableScreenState createState() => _PlayTableScreenState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _PlayTableScreenState extends State<PlayTableScreen> {
   final List<bool> _servedPages = [
     false,
     false,
