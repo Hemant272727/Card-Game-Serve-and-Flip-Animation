@@ -1,13 +1,10 @@
 import 'dart:async';
 
-import 'package:flame/flame.dart';
 import 'package:flame/spritesheet.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-import 'package:flame/flame.dart';
-import 'package:flame/sprite.dart';
+
 import 'screens/play_table_screen.dart';
-import 'screens/size_animation_screen.dart';
 
 final samllCardSpriteSheet = SpriteSheet(
   imageName: 'sprint_cards_small.png',
@@ -19,7 +16,7 @@ final samllCardSpriteSheet = SpriteSheet(
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  samllCardSpriteSheet.getSprite(2, 10);
+  samllCardSpriteSheet.getSprite(1, 1);
   Timer(Duration(seconds: 1), () {
     runApp(MyApp());
   });
@@ -35,8 +32,11 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           title: 'Flutter Demo',
           debugShowCheckedModeBanner: false,
-          // home: PlayTableScreen(),
-          home: SizeAnimationScreen(),
+          home: PlayTableScreen(),
+          // home: SizeAnimationScreen(),
+          // home: RotationAnimationScreen(),
+          // home: OpacityAnimationScreen(),
+          // home: TranslationAnimationScreen(),
         );
       });
     });
