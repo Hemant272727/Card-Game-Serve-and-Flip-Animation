@@ -16,6 +16,8 @@ class SizeAnimationScreen extends StatefulWidget {
 
 class _SizeAnimationScreenState extends State<SizeAnimationScreen> {
   bool sizeChange = false;
+  Timer sizeAnimation;
+
   @override
   void initState() {
     super.initState();
@@ -26,10 +28,17 @@ class _SizeAnimationScreenState extends State<SizeAnimationScreen> {
     sizeChangeAnimation();
   }
 
+  @override
+  void dispose() {
+    sizeAnimation.cancel();
+    super.dispose();
+  }
+
   sizeChangeAnimation() {
     int counter = 0;
-    Timer.periodic(Duration(seconds: 2), (timer) {
+    sizeAnimation = Timer.periodic(Duration(seconds: 2), (timer) {
       counter++;
+      if (!mounted) return;
       setState(() {
         sizeChange = !sizeChange;
       });

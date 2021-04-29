@@ -51,6 +51,13 @@ class _PlayTableScreenState extends State<PlayTableScreen> {
     serveCardAnimation();
   }
 
+  @override
+  void dispose() {
+    servingTimer.cancel();
+    flipingTimer.cancel();
+    super.dispose();
+  }
+
   serveCardAnimation() {
     servingTimer =
         Timer.periodic(const Duration(milliseconds: 500), (serveTimer) {
@@ -66,6 +73,7 @@ class _PlayTableScreenState extends State<PlayTableScreen> {
             flipingTimer.cancel();
             flipTimer.cancel();
           } else {
+            if (!mounted) return;
             setState(() {
               _flipedPages[flipIndex] = true;
             });
@@ -74,6 +82,7 @@ class _PlayTableScreenState extends State<PlayTableScreen> {
           }
         });
       } else {
+        if (!mounted) return;
         setState(() {
           _servedPages[servedIndex] = true;
         });

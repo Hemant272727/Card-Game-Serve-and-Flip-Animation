@@ -17,6 +17,7 @@ class ServingAnimationScreen extends StatefulWidget {
 class _ServingAnimationScreenState extends State<ServingAnimationScreen> {
   bool sizeChange = false;
   List<bool> servedPages = [false, false, false];
+  Timer servingTimer;
 
   @override
   void initState() {
@@ -28,9 +29,16 @@ class _ServingAnimationScreenState extends State<ServingAnimationScreen> {
     sizeChangeAnimation();
   }
 
+  @override
+  void dispose() {
+    servingTimer.cancel();
+    super.dispose();
+  }
+
   sizeChangeAnimation() {
     int counter = 0;
-    Timer.periodic(Duration(seconds: 2), (timer) {
+    servingTimer = Timer.periodic(Duration(seconds: 2), (timer) {
+      if (!mounted) return;
       setState(() {
         servedPages[counter] = true;
       });

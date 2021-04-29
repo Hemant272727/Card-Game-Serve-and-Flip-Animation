@@ -18,6 +18,7 @@ class TranslationAnimationScreen extends StatefulWidget {
 class _TranslationAnimationScreenState
     extends State<TranslationAnimationScreen> {
   bool sizeChange = false;
+  Timer translationAnimation;
 
   @override
   void initState() {
@@ -31,8 +32,9 @@ class _TranslationAnimationScreenState
 
   sizeChangeAnimation() {
     int counter = 0;
-    Timer.periodic(Duration(seconds: 2), (timer) {
+    translationAnimation = Timer.periodic(Duration(seconds: 2), (timer) {
       counter++;
+      if (!mounted) return;
       setState(() {
         sizeChange = !sizeChange;
       });

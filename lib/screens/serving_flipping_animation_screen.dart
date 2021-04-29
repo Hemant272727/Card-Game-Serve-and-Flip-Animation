@@ -20,6 +20,8 @@ class _ServingFlippingAnimationScreenState
   bool sizeChange = false;
   List<bool> servedPages = [false, false, false];
   List<bool> flipPages = [false, false, false];
+  Timer servingTimer;
+  Timer flipingTimer;
 
   @override
   void initState() {
@@ -31,23 +33,34 @@ class _ServingFlippingAnimationScreenState
     sizeChangeAnimation();
   }
 
+  @override
+  void dispose() {
+    servingTimer.cancel();
+    flipingTimer.cancel();
+    super.dispose();
+  }
+
   sizeChangeAnimation() {
     int serveCounter = 0;
     int flipCounter = 0;
-    Timer.periodic(Duration(seconds: 2), (serveTimer) {
+    servingTimer = Timer.periodic(Duration(seconds: 2), (serveTimer) {
+      if (!mounted) return;
       setState(() {
         servedPages[serveCounter] = true;
       });
       serveCounter++;
       if (serveCounter == 3) {
         serveTimer.cancel();
-        Timer.periodic(Duration(seconds: 2), (flipTimer) {
+        servingTimer.cancel();
+        flipingTimer = Timer.periodic(Duration(seconds: 2), (flipTimer) {
+          if (!mounted) return;
           setState(() {
             flipPages[flipCounter] = true;
           });
           flipCounter++;
           if (flipCounter == 3) {
             flipTimer.cancel();
+            flipingTimer.cancel();
           }
         });
       }

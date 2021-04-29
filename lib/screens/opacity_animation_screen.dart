@@ -16,6 +16,8 @@ class OpacityAnimationScreen extends StatefulWidget {
 
 class _OpacityAnimationScreenState extends State<OpacityAnimationScreen> {
   bool opacityChange = false;
+  Timer opacityTimer;
+
   @override
   void initState() {
     super.initState();
@@ -26,10 +28,17 @@ class _OpacityAnimationScreenState extends State<OpacityAnimationScreen> {
     opacityChangeAnimation();
   }
 
+  @override
+  void dispose() {
+    opacityTimer.cancel();
+    super.dispose();
+  }
+
   opacityChangeAnimation() {
     int counter = 0;
-    Timer.periodic(Duration(seconds: 2), (timer) {
+    opacityTimer = Timer.periodic(Duration(seconds: 2), (timer) {
       counter++;
+      if (!mounted) return;
       setState(() {
         opacityChange = !opacityChange;
       });

@@ -17,6 +17,8 @@ class FlippingAnimationScreen extends StatefulWidget {
 
 class _FlippingAnimationScreenState extends State<FlippingAnimationScreen> {
   bool flippingChange = false;
+  Timer flippingTimer;
+
   @override
   void initState() {
     super.initState();
@@ -27,8 +29,15 @@ class _FlippingAnimationScreenState extends State<FlippingAnimationScreen> {
     flippingChangeAnimation();
   }
 
+  @override
+  void dispose() {
+    flippingTimer.cancel();
+    super.dispose();
+  }
+
   flippingChangeAnimation() {
-    Timer(Duration(seconds: 3), () {
+    flippingTimer = Timer(Duration(seconds: 3), () {
+      if (!mounted) return;
       setState(() {
         flippingChange = !flippingChange;
       });

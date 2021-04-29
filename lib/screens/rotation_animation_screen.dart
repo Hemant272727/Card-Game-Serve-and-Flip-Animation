@@ -19,6 +19,8 @@ class _RotationAnimationScreenState extends State<RotationAnimationScreen> {
   bool rotationChange = false;
   double enableAngle = 0;
   double disableAngle = 180;
+  Timer rotationTimer;
+
   @override
   void initState() {
     super.initState();
@@ -29,28 +31,39 @@ class _RotationAnimationScreenState extends State<RotationAnimationScreen> {
     opacityChangeAnimation();
   }
 
+  @override
+  void dispose() {
+    rotationTimer.cancel();
+    super.dispose();
+  }
+
   opacityChangeAnimation() {
     int counter = 0;
-    Timer.periodic(Duration(seconds: 2), (timer) {
+    rotationTimer = Timer.periodic(Duration(seconds: 2), (timer) {
       counter++;
+      if (!mounted) return;
       setState(() {
         rotationChange = !rotationChange;
       });
 
       if (enableAngle == 0) {
+        if (!mounted) return;
         setState(() {
           enableAngle = 180;
         });
       } else {
+        if (!mounted) return;
         setState(() {
           enableAngle = 0;
         });
       }
       if (disableAngle == 180) {
+        if (!mounted) return;
         setState(() {
           disableAngle = 0;
         });
       } else {
+        if (!mounted) return;
         setState(() {
           disableAngle = 180;
         });
