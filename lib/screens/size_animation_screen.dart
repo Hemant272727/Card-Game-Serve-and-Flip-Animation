@@ -16,7 +16,6 @@ class SizeAnimationScreen extends StatefulWidget {
 
 class _SizeAnimationScreenState extends State<SizeAnimationScreen> {
   bool sizeChange = false;
-  final _audioCache = ImageCache();
   @override
   void initState() {
     super.initState();

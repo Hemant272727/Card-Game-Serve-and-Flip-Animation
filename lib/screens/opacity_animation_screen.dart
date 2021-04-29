@@ -16,7 +16,6 @@ class OpacityAnimationScreen extends StatefulWidget {
 
 class _OpacityAnimationScreenState extends State<OpacityAnimationScreen> {
   bool opacityChange = false;
-  final _audioCache = ImageCache();
   @override
   void initState() {
     super.initState();
